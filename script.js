@@ -22,51 +22,27 @@ const images = [
     }
 ];
 
-// Come nel primo carosello realizzato, focalizziamoci prima sulla creazione del markup statico:
-// costruiamo il container e inseriamo l'immagine grande in modo da poter stilare lo slider.
+const mainImage = document.getElementById('current-img-carousel').querySelector('img');
 
-const container = document.querySelector(".carousel-container");
+const upButton = document.getElementById('up-btn');
 
-container.innerHTML = `
+const downButton = document.getElementById('down-btn');
 
-<div class="wrapper-left" id="current-img-carousel">
-<img src="./img/01.webp" class="spiderman-1" alt="spiderman image">
-</div>
-<div class="wrapper-right">
-<img src="${ images[0].image}" alt="">
-<img src="${ images[1].image}" alt="">
-<img src="${ images[2].image}" alt="">
-<img src="${ images[3].image}" alt="">
-<img src="${ images[4].image}" alt="">
-</div>
+let currentImageIndex = 0;
 
-<button><i id="up-btn" class="fa-solid fa-chevron-up"></i></button>
-<button><i id="down-btn" class="fa-solid fa-chevron-down"></i></button>
-`
+function updateMainImage() {
+    mainImage.src = images[currentImageIndex].image;
+    mainImage.alt = images[currentImageIndex].title;
+}
 
-
-const nextButton = document.querySelector('#up-btn');
-
-nextButton.addEventListener('click', function(){
-    console.log('Up button has been clicked');
-
-    images[image[0]].classList.remove('active');
-
-    activeIndex = activeIndex + 1;
-
-    images[activeIndex].classList.add('active');
+upButton.addEventListener('click', () => {
+    currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+    updateMainImage();
 });
 
-
-
-const prevButton = document.querySelector('#down-btn');
-
-prevButton.addEventListener('click', function(){
-    console.log('Down button has been clicked');
-
-    imageElements[activeIndex].classList.remove('active');
-
-    activeIndex = activeIndex - 1;
-
-    imageElements[activeIndex].classList.add('active');
+downButton.addEventListener('click', () => {
+    currentImageIndex = (currentImageIndex + 1) % images.length;
+    updateMainImage();
 });
+
+updateMainImage();

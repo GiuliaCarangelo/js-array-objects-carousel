@@ -17,7 +17,7 @@ main{
 }
 
 .wrapper-left{
-    display: block;
+    display: inline-block;
     width: 60%;
     height: 500px;
 }
@@ -43,8 +43,6 @@ main{
 .first-slide{
     position: relative;
 }
-
-img:
 
 button{
     height: 30px;
